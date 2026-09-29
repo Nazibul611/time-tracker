@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Floating Time Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="titlebar">
+    <span id="titlebar-label">⏱ Time Tracker</span>
+    <div id="titlebar-controls">
+      <button id="pin-btn" title="Toggle always-on-top">📌</button>
+      <button id="min-btn" title="Minimize">—</button>
+      <button id="close-btn" title="Close">✕</button>
+    </div>
+  </div>
+
+  <div id="tabs">
+    <button class="tab-btn active" data-tab="timer">Timer</button>
+    <button class="tab-btn" data-tab="projects">Projects</button>
+    <button class="tab-btn" data-tab="entries">Entries</button>
+    <button class="tab-btn" data-tab="daily">Daily</button>
+    <button class="tab-btn" data-tab="report">Report</button>
+    <button class="tab-btn" data-tab="analysis">Analysis</button>
+  </div>
+
+  <div id="content">
+    <section id="tab-timer" class="tab-panel active">
+      <label for="task-select">Current task</label>
+      <select id="task-select"></select>
+      <div id="elapsed">00:00:00</div>
+      <button id="start-stop-btn">Start</button>
+    </section>
+
+    <section id="tab-projects" class="tab-panel">
+      <div class="row">
+        <input id="new-project-name" placeholder="New project name" />
+        <button id="add-project-btn">Add</button>
+      </div>
+      <div id="project-list"></div>
+
+      <div id="project-detail" class="hidden">
+        <h3 id="detail-project-name"></h3>
+
+        <label for="detail-client">Client</label>
+        <input id="detail-client" placeholder="Client name" />
+
+        <div class="row">
+          <div style="flex:1">
+            <label for="detail-start-date">Start date</label>
+            <input type="date" id="detail-start-date" />
+          </div>
+          <div style="flex:1">
+            <label for="detail-deadline">Deadline</label>
+            <input type="date" id="detail-deadline" />
+          </div>
+        </div>
+
+        <label for="detail-notes">Notes</label>
+        <textarea id="detail-notes" rows="2" placeholder="Any other project details"></textarea>
+
+        <button id="detail-save-btn">Save project details</button>
+
+        <h4>Tasks</h4>
+        <div id="detail-task-list"></div>
+        <div class="row">
+          <input id="detail-new-task-name" placeholder="New task name" />
+          <button id="detail-add-task-btn">Add</button>
+        </div>
+
+        <h4>Docs &amp; invoices</h4>
+        <div id="detail-attachments"></div>
+        <div class="row">
+          <select id="attachment-type">
+            <option value="invoice">Invoice</option>
+            <option value="doc">Document</option>
+            <option value="link">Link</option>
+          </select>
+          <input type="month" id="attachment-month" />
+        </div>
+        <input id="attachment-label" placeholder="Label (e.g. September invoice)" />
+        <div class="row">
+          <button id="attach-file-btn">Attach file</button>
+        </div>
+        <div class="row">
+          <input id="attachment-url" placeholder="or paste a URL" />
+          <button id="attach-link-btn">Add link</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-entries" class="tab-panel">
+      <form id="manual-entry-form">
+        <label for="entry-task-select">Task</label>
+        <select id="entry-task-select"></select>
+        <label for="entry-date">Date</label>
+        <input type="date" id="entry-date" />
+        <div class="row">
+          <div style="flex:1">
+            <label for="entry-start">Start time</label>
+            <input type="time" id="entry-start" />
+          </div>
+          <div style="flex:1">
+            <label for="entry-end">End time</label>
+            <input type="time" id="entry-end" />
+          </div>
+        </div>
+        <button type="submit" id="entry-save-btn">Add entry</button>
+        <button type="button" id="entry-cancel-btn" class="hidden">Cancel edit</button>
+      </form>
+      <div id="entry-list"></div>
+    </section>
+
+    <section id="tab-daily" class="tab-panel">
+      <div class="row">
+        <button id="prev-week-btn-daily">◀</button>
+        <span id="week-label-daily"></span>
+        <button id="next-week-btn-daily">▶</button>
+      </div>
+      <div id="daily-bars"></div>
+    </section>
+
+    <section id="tab-report" class="tab-panel">
+      <div class="row">
+        <button id="prev-week-btn">◀</button>
+        <span id="week-label"></span>
+        <button id="next-week-btn">▶</button>
+      </div>
+      <table id="report-table">
+        <thead><tr><th>Project</th><th>Task</th><th>Hours</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <button id="export-csv-btn">Export CSV</button>
+    </section>
+
+    <section id="tab-analysis" class="tab-panel">
+      <div id="analysis-bars"></div>
+    </section>
+  </div>
+
+  <div id="switch-overlay" class="hidden">
+    <div id="switch-card">
+      <p id="switch-message"></p>
+      <div class="row">
+        <button id="switch-keep">Keep tracking</button>
+        <button id="switch-change">Switch task</button>
+        <button id="switch-pause">Pause</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

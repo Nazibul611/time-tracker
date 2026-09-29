@@ -1,0 +1,37 @@
+{
+  "name": "floating-time-tracker",
+  "version": "1.0.0",
+  "description": "Floating always-on-top time tracker with automatic window-switch prompts, weekly reports and per-task analysis.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "author": "You",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.yourname.timetracker",
+    "productName": "Floating Time Tracker",
+    "asar": false,
+    "files": [
+      "main.js",
+      "preload.js",
+      "windowWatcher.js",
+      "store.js",
+      "get-active-window.ps1",
+      "renderer/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "renderer/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
